@@ -43,8 +43,12 @@ public abstract class TurtleShellMixin extends LivingEntity {
     private void updateTurtleHelmet(CallbackInfo ci){
         ItemStack itemStack = getEquippedStack(EquipmentSlot.HEAD);
         if (!isCreative() && canMoveVoluntarily() && !itemStack.isEmpty() && itemStack.isOf(Items.TURTLE_HELMET)){
-            int damageTimeHelmet = EnchantmentHelper.getLevel(entry, itemStack) >
-                    0 ? 340 * (1 + EnchantmentHelper.getLevel(entry, itemStack) / 2) : 340;
+            int damageTimeHelmet = switch (EnchantmentHelper.getLevel(entry, itemStack)) {
+                case 1 -> 600;
+                case 2 -> 1400;
+                case 3 -> 3200;
+                default -> 300;
+            };
             if (isSubmergedIn(FluidTags.WATER)) {
                 this.addStatusEffect(new StatusEffectInstance(StatusEffects.WATER_BREATHING, 100));
                 if (getWorld().getTime() % damageTimeHelmet == 0){
