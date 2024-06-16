@@ -47,6 +47,7 @@ public abstract class TurtleShellMixin extends LivingEntity {
                 case 1 -> 600;
                 case 2 -> 1400;
                 case 3 -> 3200;
+                case 4 -> 5600; //In case quark or some other mod that adds higher level chant is loaded on
                 default -> 300;
             };
             if (isSubmergedIn(FluidTags.WATER)) {
